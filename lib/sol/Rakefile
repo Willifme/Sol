@@ -1,0 +1,33 @@
+require "rake/testtask"
+
+require "./lexer"
+
+task :default => ["build:file"]
+
+namespace :build do
+
+	task :file => [:parser] do 
+
+		sh "./sol example.sol"
+
+	end
+
+	task :repl => [:parser] do 
+
+		sh "./sol"
+
+	end
+
+	task :parser do
+
+		sh "racc -o parser.rb grammar.y"
+
+	end
+
+end
+
+Rake::TestTask.new do |test|
+
+	test.pattern = "tests/*.rb"
+
+end
