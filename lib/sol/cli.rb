@@ -24,8 +24,6 @@ module Sol
 
 		def repl
 
-			Readline.completion_proc = proc {} # Disable tab
-
 			puts "Sol #{VERSION} running on ruby #{RUBY_VERSION}"
 
 			loop do
@@ -35,7 +33,7 @@ module Sol
 					line = Readline::readline('> ')
 
 					Readline::HISTORY.push(line)
-						   
+
 					value = @interpreter.eval(line)
 
 					puts "#{value.ruby_value.inspect}"

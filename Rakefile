@@ -7,15 +7,15 @@ task :default => ["build:file"]
 
 namespace :build do
 
-	task :file => [:parser] do 
+	task :file => [:parser] do
 
-		sh "./lib/sol/sol ./lib/sol/example.sol"
+		sh "bin/sol ./lib/sol/example.sol"
 
 	end
 
-	task :repl => [:parser] do 
+	task :repl => [:parser] do
 
-		sh "./lib/sol/sol"
+		sh "bin/sol"
 
 	end
 
