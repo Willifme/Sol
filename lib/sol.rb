@@ -1,5 +1,7 @@
-require "sol/version"
-
-module Sol
-  # Your code goes here...
-end
+require_relative "sol/version"
+require_relative "sol/interpreter"
+require_relative "sol/lexer"
+require_relative "sol/nodes"
+require_relative "sol/parser"
+require_relative "sol/runtime"
+require_relative "sol/cli"
