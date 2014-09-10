@@ -1,6 +1,6 @@
 # Sol
 
-TODO: Write a gem description
+A toy programming language currently in basic development
 
 ## Installation
 
@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run `sol` in the command line.
 
 ## Contributing
 

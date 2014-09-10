@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Willifme"]
   spec.email         = ["penguinwithwaffle@gmail.com"]
   spec.summary       = %q{A toy programming language.}
-  spec.description   = %q{.}
-  spec.homepage      = ""
+  spec.description   = %q{A toy programming language currently in basic development}
+  spec.homepage      = "https://github.com/Willifme/Sol"
   spec.license       = "GPL-2"
 
   spec.files         = `git ls-files -z`.split("\x0")
