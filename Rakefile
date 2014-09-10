@@ -9,19 +9,29 @@ namespace :build do
 
 	task :file => [:parser] do
 
-		sh "bin/sol ./lib/sol/example.sol"
+		# Have to escape strings otherwise everything goes wrong
+
+		sh "ruby -r './lib/sol' -e \"Sol::CLI.new(false).load('./lib/sol/example.sol')\"" 
 
 	end
 
 	task :repl => [:parser] do
 
-		sh "bin/sol"
+		sh "ruby -r './lib/sol' -e 'Sol::CLI.new(false).repl'"
+
+	#	sh "bin/sol"
+
+	end
+
+	task :lexerepl do
+
+		sh "ruby -r './lib/sol/lexer' -e 'Sol::Lexer.new.repl'"
 
 	end
 
 	task :parser do
 
-		sh "racc -o ./lib/sol/parser.y ./lib/sol/grammar.y"
+		sh "racc ./lib/sol/grammar.y -o ./lib/sol/parser.rb"
 
 	end
 

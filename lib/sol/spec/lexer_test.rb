@@ -55,6 +55,12 @@ describe "lexer" do
 
 	end
 
+	it "can accept singleline comments" do
+
+		assert_equal [], @lexer.tokenise("//testing!")
+
+	end
+
 	it "can accept literals" do 
 
 		@literals.each do |literal|

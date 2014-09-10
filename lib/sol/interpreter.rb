@@ -34,6 +34,7 @@ module Sol
 
 			end
 
+
 			# The last value evaluated in a method is the return value. Or null if node
 			return_value || RuntimeModel::Runtime["null"]
 
@@ -54,7 +55,7 @@ module Sol
 
 	class StringNode
 
-		def eval(context)  
+		def eval(context)
 
 			RuntimeModel::Runtime["String"].new_with_value(value)
 
@@ -64,7 +65,7 @@ module Sol
 
 	class TrueNode
 
-		def eval(context)  
+		def eval(context)
 
 			RuntimeModel::Runtime["true"]
 
@@ -74,7 +75,7 @@ module Sol
 
 	class FalseNode
 
-		def eval(context)  
+		def eval(context)
 
 			RuntimeModel::Runtime["false"]
 
@@ -84,7 +85,7 @@ module Sol
 
 	class NullNode
 
-		def eval(context)  
+		def eval(context)
 
 			RuntimeModel::Runtime["null"]
 
@@ -112,9 +113,9 @@ module Sol
 
 				end
 
-				eval_arguments = arguments.map do |arg| 
+				eval_arguments = arguments.map do |arg|
 
-					arg.eval(context) 
+					arg.eval(context)
 
 				end
 

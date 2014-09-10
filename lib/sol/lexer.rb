@@ -5,7 +5,7 @@ require "readline"
 module Sol
 
     class Lexer
-     
+
         attr_reader :KEYWORDS
 
         IDENTIFIER = /\A([a-zA-Z]\p{WORD}+\w*)/
@@ -19,6 +19,8 @@ module Sol
         WHITESPACE = /\A([ \t\r\n]+)/
 
         NEWLINE = /\A([\r\n])+/
+
+        COMMENT = /\A(\/[\/]+[^\r\n]*)/
 
         def initialize
 
@@ -42,25 +44,25 @@ module Sol
               @chunk = @input[@i..-1]
 
               extract_next_token
-             
+
             end
 
             return @tokens
-             
+
         end
 
         def repl
 
             loop do
-             
+
               line = Readline::readline('> ')
-             
-              break if line.nil? || line == 'quit'
-             
+
+              exit(0) if line.nil? || line == 'quit'
+
               Readline::HISTORY.push(line)
 
               puts "#{tokenise(line)}" # Brackets are for clarity purposes
-             
+
             end
 
         end
@@ -75,9 +77,12 @@ module Sol
 
             return if string_token
 
+            return if remove_comment_token
+
             return if whitespace_token
 
             return literal_token
+
 
         end
 
@@ -124,6 +129,14 @@ module Sol
 
         end
 
+        def remove_comment_token
+
+            return false unless comment = @chunk[COMMENT, 1]
+
+            @i += comment.length
+
+        end
+
         # Ignore whitespace
 
         def whitespace_token
@@ -142,6 +155,8 @@ module Sol
 
             if value
 
+                puts "Tokens last: #{@tokens.last}, #{@tokens.last[0]}"
+
                 @tokens << ["\n", "\n"]  unless @tokens.last && @tokens.last[0] == "\n"
 
                 return @i + value.length
@@ -157,7 +172,7 @@ module Sol
             @i += value.length
 
         end
-     
+
     end
 
 end

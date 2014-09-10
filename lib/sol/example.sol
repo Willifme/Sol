@@ -1,8 +1,7 @@
+// Hello, world
 func hello() {
 	
-	print("hello, world")
-
-	print(1+1)
+	print("Hello, world")
 
 }
 

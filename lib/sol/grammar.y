@@ -37,8 +37,8 @@ class Parser
 	# - Assign to "result" the value returned by the rule.
 
 	# All parsinng will end in this rule, being the trunk of the AST
-	Root: 
-		/* nothing */							{ result = Nodes.new([]) }				
+	Root:
+		/* nothing */							{ result = Nodes.new([]) }
 		| Expressions                       	{ result = val[0] }
 		;
 
@@ -102,13 +102,13 @@ class Parser
 		| Expression '&&' Expression 			{ result = CallNode.new(val[0], val[1], [val[2]]) }
 		| Expression '==' Expression 			{ result = CallNode.new(val[0], val[1], [val[2]]) }
 		| Expression '!=' Expression 			{ result = CallNode.new(val[0], val[1], [val[2]]) }
-		| Expression '>' Expression   			{ result = CallNode.new(val[0], val[1], [val[2]]) } 
+		| Expression '>' Expression   		    { result = CallNode.new(val[0], val[1], [val[2]]) }
 		| Expression '>=' Expression 			{ result = CallNode.new(val[0], val[1], [val[2]]) }
 		| Expression '<' Expression  			{ result = CallNode.new(val[0], val[1], [val[2]]) }
 		| Expression '<=' Expression 			{ result = CallNode.new(val[0], val[1], [val[2]]) }
 		| Expression '+' Expression  			{ result = CallNode.new(val[0], val[1], [val[2]]) }
 		| Expression '-' Expression  			{ result = CallNode.new(val[0], val[1], [val[2]]) }
-		| Expression '*' Expression 			{ result = CallNode.new(val[0], val[1], [val[2]]) } 
+		| Expression '*' Expression 			{ result = CallNode.new(val[0], val[1], [val[2]]) }
 		| Expression '/' Expression  			{ result = CallNode.new(val[0], val[1], [val[2]]) }
 		;
 

@@ -6,17 +6,21 @@ module Sol
 
 	class CLI
 
-		def initialize
+		def initialize(cmd)
 
 			@interpreter = Interpreter.new
 
-			if file = ARGV.first
+			if cmd
 
-				@interpreter.eval File.read(file)
+				if file = ARGV.first
 
-			else
+					load(file)
 
-				repl()
+				else
+
+					repl()
+
+				end
 
 			end
 
@@ -24,7 +28,7 @@ module Sol
 
 		def repl
 
-			puts "Sol #{VERSION} running on ruby #{RUBY_VERSION}"
+			puts "Sol #{VERSION} running on Ruby #{RUBY_VERSION}"
 
 			loop do
 
@@ -47,6 +51,12 @@ module Sol
 				end
 
 			end
+
+		end
+
+		def load(file)
+
+			@interpreter.eval(File.read(file))
 
 		end
 
