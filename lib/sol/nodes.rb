@@ -76,4 +76,6 @@ module Sol
   # structures like while, for, loop, etc.
   class IfNode < Struct.new(:condition, :body); end
 
+  class ReturnNode < Struct.new(:arguments); end
+
 end

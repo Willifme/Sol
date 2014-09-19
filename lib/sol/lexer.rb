@@ -14,7 +14,7 @@ module Sol
 
         STRING = /\A["'](.*?)["']/
 
-        OPERATOR = /\A(\|\||&&|==|!=|<=|>=)/
+        OPERATOR = /\A(\|\||&&|==|!=|<=|>=|->)/
 
         WHITESPACE = /\A([ \t\r\n]+)/
 
@@ -24,7 +24,7 @@ module Sol
 
         def initialize
 
-            @KEYWORDS = ["func", "if", "true", "false", "null"]
+            @KEYWORDS = ["func", "if", "true", "false", "null", "return", "Int", "String"]
 
         end
 

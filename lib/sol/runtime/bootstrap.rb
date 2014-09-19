@@ -1,5 +1,6 @@
 require_relative "class"
 require_relative "context"
+require_relative "methods"
 
 module Sol
 
@@ -21,11 +22,11 @@ module Sol
 
 		Runtime["Object"] = object_class
 
-		Runtime["Number"] = SolClass.new
+		Runtime["Number"] = object_class # I think this works
 
-		Runtime["String"] = SolClass.new
+		Runtime["String"] = object_class # I think this works
 
-		# Everything is an object in  our language, even true, false and null. So they nneed to have a class too.
+		# Everything is an object in  our language, even true, false and null. So they need to have a class too.
 		Runtime["TrueClass"] = SolClass.new
 
 		Runtime["FalseClass"] = SolClass.new
@@ -67,89 +68,7 @@ module Sol
 
 		end
 
-		# Or (||)
-		Runtime["Number"].runtime_methods["||"] = proc do |receiver, arguments|
-
-			Runtime["Number"].new_with_value(receiver.ruby_value || arguments.first.ruby_value)
-
-		end
-
-		# And (&&)
-		Runtime["Number"].runtime_methods["&&"] = proc do |receiver, arguments|
-
-			Runtime["Number"].new_with_value(receiver.ruby_value && arguments.first.ruby_value)
-
-		end
-
-		# Equal to (==)
-		Runtime["Number"].runtime_methods["=="] = proc do |receiver, arguments|
-
-			Runtime["Number"].new_with_value(receiver.ruby_value == arguments.first.ruby_value)
-
-		end
-
-		# Does not equal to (!=)
-		Runtime["Number"].runtime_methods["!="] = proc do |receiver, arguments|
-
-			Runtime["Number"].new_with_value(receiver.ruby_value != arguments.first.ruby_value)
-
-		end
-
-		# Greater than (>)
-		Runtime["Number"].runtime_methods[">"] = proc do |receiver, arguments|
-
-			Runtime["Number"].new_with_value(receiver.ruby_value > arguments.first.ruby_value)
-
-		end
-
-		# Greater than or equal to (>=)
-		Runtime["Number"].runtime_methods[">="] = proc do |receiver, arguments|
-
-			Runtime["Number"].new_with_value(receiver.ruby_value >= arguments.first.ruby_value)
-
-		end
-
-		# Less than (<)
-		Runtime["Number"].runtime_methods["<"] = proc do |receiver, arguments|
-
-			Runtime["Number"].new_with_value(receiver.ruby_value < arguments.first.ruby_value)
-
-		end
-
-		# Less than or equal to (>=)
-		Runtime["Number"].runtime_methods["<="] = proc do |receiver, arguments|
-
-			Runtime["Number"].new_with_value(receiver.ruby_value <= arguments.first.ruby_value)
-
-		end
-
-		# Add
-		Runtime["Number"].runtime_methods["+"] = proc do |receiver, arguments|
-
-			Runtime["Number"].new_with_value(receiver.ruby_value + arguments.first.ruby_value)
-
-		end
-
-		# Minus
-		Runtime["Number"].runtime_methods["-"] = proc do |receiver, arguments|
-
-			Runtime["Number"].new_with_value(receiver.ruby_value - arguments.first.ruby_value)
-
-		end
-
-		# Times 
-		Runtime["Number"].runtime_methods["*"] = proc do |receiver, arguments|
-
-			Runtime["Number"].new_with_value(receiver.ruby_value * arguments.first.ruby_value)
-
-		end
-
-		# Divide
-		Runtime["Number"].runtime_methods["/"] = proc do |receiver, arguments|
-
-			Runtime["Number"].new_with_value(receiver.ruby_value / arguments.first.ruby_value)
-
-		end
+		Methods.new("Object") # Will do for now
 
 	end
 

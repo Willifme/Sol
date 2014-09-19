@@ -1,15 +1,18 @@
+
 class Parser
 
 	#Declare tokens by the lexer
 
 	token IF
 	token FUNC
+	token INT STRING
 	token NEWLINE
 	token NUMBER
 	token STRING
 	token TRUE FALSE NULL
 	token IDENTIFIER
 	token CONSTANT
+	token RETURN
 
 	prechigh
 		left "."
@@ -69,7 +72,7 @@ class Parser
 		| ";"
 		;
 
-	# All hardcoded value
+	# All hardcoded values
 	Literal:
 		NUMBER									{ result = NumberNode.new(val[0]) }
 		| STRING								{ result = StringNode.new(val[0]) }
@@ -126,6 +129,8 @@ class Parser
 	Func:
 		# ParamList is optional
 		FUNC IDENTIFIER "(" ParamList ")" Block { result = FuncNode.new(val[1], val[3], val[5]) }
+		# Shift by one to account for arrow and type
+		| FUNC IDENTIFIER "(" ParamList ")" "->" Types Block { result = FuncNode.new(val[1], val[3], val[7]) } 
 		;
 
 	ParamList:
@@ -133,6 +138,11 @@ class Parser
 		| IDENTIFIER 							{ result = [] }
 		| ParamList "," IDENTIFIER 				{ result = val }
 		;
+
+	Types:
+	    INT                                     { result = [] }
+	    | STRING                                { result = [] }
+	    ;
 
 	# If block
 	If:
@@ -142,6 +152,8 @@ class Parser
 	# A block of code all the work was done by the lexer
 	Block:
 		"{" Expressions "}" 					{ result = val[1] }
+		| "{" Expressions RETURN Expression "}" { result = ReturnNode.new(val[3])}
+		| "{" RETURN Expression "}"             { result = ReturnNode.new(val[2]) }
 		;
 
 end

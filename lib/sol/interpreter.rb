@@ -1,3 +1,5 @@
+require "racc"
+
 require_relative "parser"
 require_relative "runtime"
 
@@ -13,7 +15,15 @@ module Sol
 
 		def eval(input)
 
-			@parser.parse(input).eval(RuntimeModel::Runtime)
+			begin
+
+				@parser.parse(input).eval(RuntimeModel::Runtime)
+
+			rescue Racc::ParseError => e
+
+				puts e.message
+
+			end
 
 		end
 
@@ -174,12 +184,22 @@ module Sol
 
 		def eval(context)
 
-			# We turn the condition node innto a Ruby value to use Ruby's "if" control structure
+			# We turn the condition node in to a Ruby value to use Ruby's "if" control structure
 			if condition.eval(context).ruby_value
 
 				body.eval(context)
 
 			end
+
+		end
+
+	end
+
+	class ReturnNode
+
+		def eval(context)
+
+			return arguments.eval(context).ruby_value
 
 		end
 

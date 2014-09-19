@@ -7,7 +7,7 @@ module Sol
 		# Represents a Sol class in the Ruby world. Classes are objects in Sol so they inherit from SolObject
 		class SolClass < SolObject
 
-			attr_reader :runtime_methods
+			attr_reader :runtime_methods, :type
 
 			# Create a new class. Number is an instance of Class for example
 			def initialize
@@ -40,7 +40,9 @@ module Sol
 
 				unless method
 
-					raise "Method not found: #{method_name}"
+					raise RuntimeError
+
+						puts "Method not found: #{method_name}"
 
 				end
 
@@ -55,13 +57,12 @@ module Sol
 
 			end
 
-			# Create an instance of this Sol class that holds a Ruby value
+			# Create an instance of this Sol class that holds a Ruby value and type
 			def new_with_value(value)
 
 				SolObject.new(self, value)
 
 			end
-
 		end
 
 	end

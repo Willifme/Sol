@@ -1,7 +1,6 @@
-// Hello, world
-func hello() {
-	
-	print("Hello, world")
+func hello() -> Int {
+
+	print("hello, world")
 
 }
 

@@ -11,21 +11,21 @@ namespace :build do
 
 		# Have to escape strings otherwise everything goes wrong
 
-		sh "ruby -r './lib/sol' -e \"Sol::CLI.new(false).load('./lib/sol/example.sol')\"" 
+		ruby "-r './lib/sol' -e \"Sol::CLI.new(false).load('./lib/sol/example.sol')\"" 
 
 	end
 
 	task :repl => [:parser] do
 
-		sh "ruby -r './lib/sol' -e 'Sol::CLI.new(false).repl'"
-
-	#	sh "bin/sol"
+		ruby "-r './lib/sol' -e 'Sol::CLI.new(false).repl'"
 
 	end
 
+	task :lexerrepl => [:lexerepl] {} # Screw it
+
 	task :lexerepl do
 
-		sh "ruby -r './lib/sol/lexer' -e 'Sol::Lexer.new.repl'"
+		ruby "-r './lib/sol/lexer' -e 'Sol::Lexer.new.repl'"
 
 	end
 
@@ -44,7 +44,5 @@ Rake::TestTask.new do |t|
 	t.test_files = FileList["lib/sol/spec/*.rb"]
 
 	t.verbose = true;
-
-	#test.pattern = "./lib/sol/tests/*.rb"
 
 end
